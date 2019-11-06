@@ -23,7 +23,7 @@ client.on("message", async message => {
   client.logger.log(`Received message: ${message.content}`);
 
   //Check if user is allowed to use me
-  if(message.author.id != "294909299287654401") return;
+  if(message.author.id == "294909299287654401" || message.author.id == "283557418347266048") {
 
   if(args[1] == "flag") {
     //Create role if not exists
@@ -48,7 +48,7 @@ client.on("message", async message => {
       else {
         var counter = 0;
         message.guild.members.array().forEach((member) => {
-          // if(!member.user.bot) {
+          if(!member.user.bot) {
             //Add role if user fits criteria
             if(member.lastMessage == undefined || member.lastMessage.createdAt < date) {
               member.addRole(role.id);
@@ -57,7 +57,7 @@ client.on("message", async message => {
               //Make sure user doesnt have role.
               member.removeRole(role.id);
             }
-          // }
+          }
         });
         message.reply(`I have marked ${counter} users as inactive.`);
       }
@@ -113,6 +113,7 @@ client.on("message", async message => {
     }).catch(err => {
       client.logger.error(err);
     })
+  }
   }
 
 })
